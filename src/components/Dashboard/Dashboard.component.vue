@@ -10,40 +10,53 @@
       <mdb-modal-header>
         <mdb-modal-title>Add Music</mdb-modal-title>
       </mdb-modal-header>
-      <mdb-modal-body>...</mdb-modal-body>
+      <mdb-modal-body>
+         <mdb-input label="Title" type="text"/>
+         <mdb-input label="Url" type="text"/>
+         <mdb-input label="Album art" type="text"/>
+      </mdb-modal-body>
       <mdb-modal-footer>
         <mdb-btn color="secondary" @click.native="musicModal = false">Close</mdb-btn>
-        <mdb-btn color="primary">Save changes</mdb-btn>
+        <mdb-btn color="primary">Add</mdb-btn>
       </mdb-modal-footer>
     </mdb-modal>
     <mdb-modal :show="photoModal" @close="photoModal = false">
       <mdb-modal-header>
         <mdb-modal-title>Add Photo</mdb-modal-title>
       </mdb-modal-header>
-      <mdb-modal-body>...</mdb-modal-body>
+      <mdb-modal-body>
+        <mdb-input label="Caption" type="text"/>
+         <mdb-input label="Url" type="text"/>
+      </mdb-modal-body>
       <mdb-modal-footer>
         <mdb-btn color="secondary" @click.native="photoModal = false">Close</mdb-btn>
-        <mdb-btn color="primary">Save changes</mdb-btn>
+        <mdb-btn color="primary">Add</mdb-btn>
       </mdb-modal-footer>
     </mdb-modal>
     <mdb-modal :show="videoModal" @close="videoModal = false">
       <mdb-modal-header>
         <mdb-modal-title>Add Video</mdb-modal-title>
       </mdb-modal-header>
-      <mdb-modal-body>...</mdb-modal-body>
+      <mdb-modal-body>
+        <mdb-input label="Title" type="text"/>
+         <mdb-input label="Url" type="text"/>
+         <mdb-input label="Thumb nail" type="text"/>
+      </mdb-modal-body>
       <mdb-modal-footer>
         <mdb-btn color="secondary" @click.native="videoModal = false">Close</mdb-btn>
-        <mdb-btn color="primary">Save changes</mdb-btn>
+        <mdb-btn color="primary">Add</mdb-btn>
       </mdb-modal-footer>
     </mdb-modal>
     <mdb-modal :show="tourModal" @close="tourModal = false">
       <mdb-modal-header>
         <mdb-modal-title>Add Tour</mdb-modal-title>
       </mdb-modal-header>
-      <mdb-modal-body>...</mdb-modal-body>
+      <mdb-modal-body>
+        <mdb-input label="Venue" type="text"/>
+      </mdb-modal-body>
       <mdb-modal-footer>
         <mdb-btn color="secondary" @click.native="tourModal = false">Close</mdb-btn>
-        <mdb-btn color="primary">Save changes</mdb-btn>
+        <mdb-btn color="primary">Add</mdb-btn>
       </mdb-modal-footer>
     </mdb-modal>
   <div class="w-50 mx-auto d-flex justify-content-between addBtn">
@@ -65,7 +78,8 @@ const {
   mdbModalHeader,
   mdbModalTitle,
   mdbModalBody,
-  mdbModalFooter
+  mdbModalFooter,
+  mdbInput
 } = require("mdbvue");
 
 @Component({
@@ -74,6 +88,7 @@ const {
     mdbContainer,
     mdbBtn,
     mdbModal,
+    mdbInput,
     mdbModalHeader,
     mdbModalTitle,
     mdbModalBody,
