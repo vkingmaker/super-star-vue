@@ -13,8 +13,8 @@
             <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
           </mdb-card>
           <mdb-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash"></i>
+            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
+            <i class="fa fa-trash text-danger"></i>
           </mdb-body>
       </mdb-col>
       <mdb-col md="4" class="mb-5">
@@ -22,8 +22,8 @@
             <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
           </mdb-card>
           <mdb-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash"></i>
+            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
+            <i class="fa fa-trash text-danger"></i>
           </mdb-body>
       </mdb-col>
       <mdb-col md="4" class="mb-5">
@@ -31,8 +31,8 @@
             <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
           </mdb-card>
           <mdb-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash"></i>
+            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
+            <i class="fa fa-trash text-danger"></i>
           </mdb-body>
       </mdb-col>
 
