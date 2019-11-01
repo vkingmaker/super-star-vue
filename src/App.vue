@@ -3,14 +3,14 @@
   <mdb-row>
   <mdb-col class="w-100 px-0">
   <mdb-navbar expand="large" dark color="black">
-    <mdb-navbar-brand href="#">
+    <mdb-navbar-brand to="/">
       Lee-Nation
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
       <mdb-navbar-nav right>
-        <mdb-nav-item href="#" active>Dashboard</mdb-nav-item>
+        <mdb-nav-item to="/dashboard" active>Dashboard</mdb-nav-item>
         <mdb-nav-item href="#">Musics</mdb-nav-item>
-        <mdb-nav-item href="#">Pictures</mdb-nav-item>
+        <mdb-nav-item to="/pictures">Pictures</mdb-nav-item>
         <mdb-nav-item href="#">Videos</mdb-nav-item>
         <mdb-nav-item href="#">Tours</mdb-nav-item>
         <mdb-nav-item href="#">Register</mdb-nav-item>
