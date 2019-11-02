@@ -13,7 +13,7 @@
         <mdb-nav-item to="/pictures">Pictures</mdb-nav-item>
         <mdb-nav-item href="#">Videos</mdb-nav-item>
         <mdb-nav-item href="#">Tours</mdb-nav-item>
-        <mdb-nav-item href="#">Register</mdb-nav-item>
+        <mdb-nav-item to="/register">Register</mdb-nav-item>
         <mdb-nav-item to="/login">Login</mdb-nav-item>
         <mdb-dropdown tag="li" class="nav-item">
           <mdb-dropdown-toggle tag="a" navLink color="transparent" slot="toggle" waves-fixed>Dropdown</mdb-dropdown-toggle>
