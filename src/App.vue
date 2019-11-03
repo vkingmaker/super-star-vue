@@ -8,15 +8,15 @@
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
       <mdb-navbar-nav right>
-        <mdb-nav-item to="/dashboard" active>Dashboard</mdb-nav-item>
-        <mdb-nav-item to="/musics">Musics</mdb-nav-item>
-        <mdb-nav-item to="/pictures">Pictures</mdb-nav-item>
-        <mdb-nav-item href="#">Videos</mdb-nav-item>
-        <mdb-nav-item href="#">Tours</mdb-nav-item>
-        <mdb-nav-item to="/register">Register</mdb-nav-item>
-        <mdb-nav-item to="/login">Login</mdb-nav-item>
-        <mdb-dropdown tag="li" class="nav-item">
-          <mdb-dropdown-toggle tag="a" navLink color="transparent" slot="toggle" waves-fixed>Dropdown</mdb-dropdown-toggle>
+        <mdb-nav-item to="/dashboard" v-if="auth != ''">Dashboard</mdb-nav-item>
+        <mdb-nav-item to="/musics" v-if="auth != ''">Musics</mdb-nav-item>
+        <mdb-nav-item to="/pictures" v-if="auth != ''">Pictures</mdb-nav-item>
+        <mdb-nav-item to="/videos" v-if="auth != ''">Videos</mdb-nav-item>
+        <mdb-nav-item to="/tours" v-if="auth != ''">Tours</mdb-nav-item>
+        <mdb-nav-item to="/register" v-if="auth == ''">Register</mdb-nav-item>
+        <mdb-nav-item to="/login" v-if="auth == ''">Login</mdb-nav-item>
+        <mdb-dropdown tag="li" class="nav-item" v-if="auth != ''">
+          <mdb-dropdown-toggle tag="a" navLink color="transparent" slot="toggle" waves-fixed v-text="auth" v-if="auth != ''"></mdb-dropdown-toggle>
           <mdb-dropdown-menu>
             <mdb-dropdown-item>Logout</mdb-dropdown-item>
           </mdb-dropdown-menu>
@@ -31,8 +31,8 @@
 
 </template>
 
-<script>
-import {
+<script lang="ts">
+const {
   mdbDropdown,
   mdbDropdownToggle,
   mdbDropdownMenu,
@@ -45,9 +45,13 @@ import {
   mdbNavbarToggler,
   mdbNavbarNav,
   mdbNavItem
-} from "mdbvue";
-export default {
-  name: "HelloWorld",
+} = require("mdbvue");
+import Component from "vue-class-component";
+import { Watch } from "vue-property-decorator";
+import Vue from "vue";
+import { getCookie } from "@/utils/cookieStorage";
+
+@Component({
   components: {
     mdbNavbar,
     mdbNavbarBrand,
@@ -62,12 +66,18 @@ export default {
     mdbDropdownMenu,
     mdbDropdownItem
   }
-};
+})
+export default class App extends Vue {
+  get auth() {
+    return this.$store.state.auth;
+  }
+}
 </script>
 <style>
 .main-content {
   max-width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   overflow: hidden;
 }
 </style>
