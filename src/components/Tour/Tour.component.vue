@@ -7,20 +7,18 @@
     </mdb-container>
   </mdb-jumbotron>
   <mdb-container class="mt-5">
-    <mdb-row>
-      <mdb-col md="8" class="mx-auto mb-4">
+    <mdb-row v-if="tours.length">
+      <mdb-col md="8" class="mx-auto mb-4" :key="tour.id" v-for="tour in tours">
         <mdb-card>
           <mdb-card-body>
-            Lorem ipsum dolor sit
+            {{tour.venue}}
           </mdb-card-body>
         </mdb-card>
       </mdb-col>
-      <mdb-col md="8" class="mx-auto mb-4">
-        <mdb-card>
-          <mdb-card-body>
-            Lorem ipsum dolor sit
-          </mdb-card-body>
-        </mdb-card>
+    </mdb-row>
+    <mdb-row v-else>
+      <mdb-col md="12">
+        <p class="text-center lead border">No Tours</p>
       </mdb-col>
     </mdb-row>
   </mdb-container>
@@ -29,6 +27,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { getTour } from "@/utils/api";
 const {
   mdbContainer,
   mdbRow,
@@ -48,7 +47,19 @@ const {
     mdbJumbotron
   }
 })
-export default class TourComponent extends Vue {}
+export default class TourComponent extends Vue {
+  tours = [] as any;
+  mounted() {
+    getTour()
+      .then(res => {
+        console.log("TOURS ------------>", res.data);
+        this.tours = res.data;
+      })
+      .catch(e => {
+        console.log("ERROR WHILE FETCHING TOURS---------->", e);
+      });
+  }
+}
 </script>
 <style>
 </style>
