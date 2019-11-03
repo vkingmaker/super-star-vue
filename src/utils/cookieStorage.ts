@@ -14,6 +14,7 @@ export const removeCookie = () => {
   if (typeof window !== 'undefined') {
     cookie.remove('superstar_name');
     cookie.remove('superstar_email');
+    cookie.remove('superstar_token');
   }
 };
 

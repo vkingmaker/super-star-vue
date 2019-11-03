@@ -7,35 +7,23 @@
     </mdb-container>
   </mdb-jumbotron>
   <mdb-container class="mt-5">
-    <mdb-row>
-      <mdb-col md="4" class="mb-5">
-       <mdb-card>
-            <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
-          </mdb-card>
-          <mdb-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash text-danger"></i>
-          </mdb-body>
-      </mdb-col>
-      <mdb-col md="4" class="mb-5">
-       <mdb-card>
-            <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
-          </mdb-card>
-          <mdb-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash text-danger"></i>
-          </mdb-body>
-      </mdb-col>
-      <mdb-col md="4" class="mb-5">
-       <mdb-card>
-            <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
-          </mdb-card>
-          <mdb-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash text-danger"></i>
-          </mdb-body>
-      </mdb-col>
+    <mdb-row v-if="musics.length">
+      <mdb-col md="4" class="mb-5" :key="music.id" v-for="music in musics">
+       <mdb-card class="pic-card">
+            <mdb-card-image :src="music.albumart" alt="Card image cap"></mdb-card-image>
 
+          <span class="ml-3 mt-2">{{music.title}}</span>
+          <mdb-card-body class="d-flex justify-content-between mt-1">
+            <i class="fa fa-heart text-danger" @click="likeMusic(music.id, music.title)"><span class="text-muted ml-1 small">({{music.likes}})</span></i>
+            <i class="fa fa-trash text-danger" @click="deleteMusic(music.id, music.title)"></i>
+          </mdb-card-body>
+        </mdb-card>
+      </mdb-col>
+    </mdb-row>
+    <mdb-row v-else>
+      <mdb-col md="12">
+        <p class="lead text-center border display-4">No Musics</p>
+      </mdb-col>
     </mdb-row>
   </mdb-container>
 </section>
@@ -43,6 +31,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { getMusic } from "@/utils/api";
 const {
   mdbJumbotron,
   mdbContainer,
@@ -64,7 +53,26 @@ const {
     mdbCardBody
   }
 })
-export default class MusicComponent extends Vue {}
+export default class MusicComponent extends Vue {
+  get musics() {
+    return this.$store.state.musics;
+  }
+
+  likeMusic(id: string, title: string) {
+    this.$store.dispatch("favouriteMusic", { id, title });
+  }
+
+  deleteMusic(id: string, title: string) {
+    // console.log("DELETE MUSIC WITH ID------->", id);
+    this.$store.dispatch("removeMusic", { id, title });
+  }
+}
 </script>
-<style>
+<style scoped>
+.pic-card {
+  height: 400px !important;
+}
+i.fa {
+  cursor: pointer;
+}
 </style>

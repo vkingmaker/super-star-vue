@@ -10,15 +10,17 @@
       <mdb-modal-header>
         <mdb-modal-title>Add Music</mdb-modal-title>
       </mdb-modal-header>
+      <form @submit.prevent="addMusic">
       <mdb-modal-body>
-         <mdb-input label="Title" type="text"/>
-         <mdb-input label="Url" type="text"/>
-         <mdb-input label="Album art" type="text"/>
+         <mdb-input label="Title" type="text" v-model="title" required/>
+         <mdb-input label="Url" type="text" v-model="url" required/>
+         <mdb-input label="Album art" type="text" v-model="albumArt" required/>
       </mdb-modal-body>
       <mdb-modal-footer>
         <mdb-btn color="secondary" @click.native="musicModal = false">Close</mdb-btn>
         <mdb-btn color="primary">Add</mdb-btn>
       </mdb-modal-footer>
+      </form>
     </mdb-modal>
     <mdb-modal :show="photoModal" @close="photoModal = false">
       <mdb-modal-header>
@@ -70,6 +72,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { addMusic } from "@/utils/api";
 const {
   mdbJumbotron,
   mdbContainer,
@@ -100,6 +103,9 @@ export default class DashboardComponent extends Vue {
   photoModal: boolean;
   videoModal: boolean;
   tourModal: boolean;
+  title = "";
+  url = "";
+  albumArt = "";
 
   constructor() {
     super();
@@ -107,6 +113,16 @@ export default class DashboardComponent extends Vue {
     this.photoModal = false;
     this.videoModal = false;
     this.tourModal = false;
+  }
+  addMusic() {
+    addMusic(this.albumArt, this.title, this.url)
+      .then(res => {
+        this.musicModal = false;
+        this.$store.commit("createMusic", res.data);
+      })
+      .catch(e => {
+        console.log("ERROR ADDING MUSIC -------------->", e);
+      });
   }
 }
 </script>

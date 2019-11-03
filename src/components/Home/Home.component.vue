@@ -18,7 +18,11 @@ const { mdbBtn } = require("mdbvue");
     mdbBtn
   }
 })
-export default class HomeComponent extends Vue {}
+export default class HomeComponent extends Vue {
+  mounted() {
+    this.$store.dispatch("updateMusics");
+  }
+}
 </script>
 <style scoped>
 img {

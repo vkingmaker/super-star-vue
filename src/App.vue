@@ -8,17 +8,17 @@
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
       <mdb-navbar-nav right>
-        <mdb-nav-item to="/dashboard" v-if="auth != ''">Dashboard</mdb-nav-item>
-        <mdb-nav-item to="/musics" v-if="auth != ''">Musics</mdb-nav-item>
-        <mdb-nav-item to="/pictures" v-if="auth != ''">Pictures</mdb-nav-item>
-        <mdb-nav-item to="/videos" v-if="auth != ''">Videos</mdb-nav-item>
-        <mdb-nav-item to="/tours" v-if="auth != ''">Tours</mdb-nav-item>
-        <mdb-nav-item to="/register" v-if="auth == ''">Register</mdb-nav-item>
-        <mdb-nav-item to="/login" v-if="auth == ''">Login</mdb-nav-item>
-        <mdb-dropdown tag="li" class="nav-item" v-if="auth != ''">
+        <mdb-nav-item to="/dashboard" v-if="auth">Dashboard</mdb-nav-item>
+        <mdb-nav-item to="/musics" v-if="auth">Musics</mdb-nav-item>
+        <mdb-nav-item to="/pictures" v-if="auth">Pictures</mdb-nav-item>
+        <mdb-nav-item to="/videos" v-if="auth">Videos</mdb-nav-item>
+        <mdb-nav-item to="/tours" v-if="auth">Tours</mdb-nav-item>
+        <mdb-nav-item to="/register" v-if="!auth">Register</mdb-nav-item>
+        <mdb-nav-item to="/login" v-if="!auth">Login</mdb-nav-item>
+        <mdb-dropdown tag="li" class="nav-item" v-if="auth">
           <mdb-dropdown-toggle tag="a" navLink color="transparent" slot="toggle" waves-fixed v-text="auth" v-if="auth != ''"></mdb-dropdown-toggle>
           <mdb-dropdown-menu>
-            <mdb-dropdown-item>Logout</mdb-dropdown-item>
+            <mdb-dropdown-item @click="logout">Logout</mdb-dropdown-item>
           </mdb-dropdown-menu>
         </mdb-dropdown>
       </mdb-navbar-nav>
@@ -49,7 +49,7 @@ const {
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 import Vue from "vue";
-import { getCookie } from "@/utils/cookieStorage";
+import { getCookie, removeCookie } from "@/utils/cookieStorage";
 
 @Component({
   components: {
@@ -69,7 +69,11 @@ import { getCookie } from "@/utils/cookieStorage";
 })
 export default class App extends Vue {
   get auth() {
-    return this.$store.state.auth;
+    return this.$store.getters.auth;
+  }
+  logout() {
+    removeCookie();
+    this.$store.commit("logout");
   }
 }
 </script>
