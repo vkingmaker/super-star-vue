@@ -1,61 +1,61 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: Home
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
+    path: "/dashboard",
+    name: "dashboard",
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Dashboard.vue')
+      import(/* webpackChunkName: "about" */ "../views/Dashboard.vue")
   },
   {
-    path: '/pictures',
-    name: 'pictures',
+    path: "/pictures",
+    name: "pictures",
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Pictures.vue')
+      import(/* webpackChunkName: "about" */ "../views/Pictures.vue")
   },
   {
-    path: '/musics',
-    name: 'musics',
+    path: "/musics",
+    name: "musics",
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Musics.vue')
+      import(/* webpackChunkName: "about" */ "../views/Musics.vue")
   },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Login.vue')
+      import(/* webpackChunkName: "about" */ "../views/Login.vue")
   },
   {
-    path: '/register',
-    name: 'register',
+    path: "/register",
+    name: "register",
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Register.vue')
+      import(/* webpackChunkName: "about" */ "../views/Register.vue")
   },
   {
-    path: '/tours',
-    name: 'tours',
+    path: "/tours",
+    name: "tours",
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Tours.vue')
+      import(/* webpackChunkName: "about" */ "../views/Tours.vue")
   },
   {
-    path: '/videos',
-    name: 'videoss',
+    path: "/videos",
+    name: "videoss",
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Videos.vue')
+      import(/* webpackChunkName: "about" */ "../views/Videos.vue")
   }
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
 });

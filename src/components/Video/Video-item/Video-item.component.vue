@@ -1,6 +1,11 @@
 <template>
   <section v-if="videos.length">
-    <mdb-card class="video-item mb-4" v-for="video in videos" :key="video.id" @click.native="selectVideo(video.id)">
+    <mdb-card
+      class="video-item mb-4"
+      v-for="video in videos"
+      :key="video.id"
+      @click.native="selectVideo(video.id)"
+    >
       <mdb-card-body class="d-flex">
         <div class="w-25 border mr-2">
           <img :src="video.thumb_nail" alt="" />

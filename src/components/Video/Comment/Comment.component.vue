@@ -1,10 +1,13 @@
 <template>
   <section>
     <section v-if="comments.length">
-      <mdb-card class="mb-4"  :key="feedback.id" v-for="feedback in comments">
+      <mdb-card class="mb-4" :key="feedback.id" v-for="feedback in comments">
         <mdb-card-body class="d-flex">
           <div>
-            <img src="https://pbs.twimg.com/profile_images/1022253973565304832/EAW5TPjj_400x400.jpg" alt="">
+            <img
+              src="https://pbs.twimg.com/profile_images/1022253973565304832/EAW5TPjj_400x400.jpg"
+              alt=""
+            />
           </div>
           <div class="mx-3">
             {{ feedback.comment }}
@@ -12,7 +15,7 @@
         </mdb-card-body>
       </mdb-card>
     </section>
-      <p class="lead text-muted text-center border" v-else>No comments</p>
+    <p class="lead text-muted text-center border" v-else>No comments</p>
   </section>
 </template>
 <script lang="ts">

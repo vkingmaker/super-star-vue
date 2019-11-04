@@ -1,6 +1,6 @@
-import axios from 'axios';
-import cookie from 'js-cookie';
-import { baseURL } from './auth';
+import axios from "axios";
+import cookie from "js-cookie";
+import { baseURL } from "./auth";
 
 // let token = cookie.get('superstar_token');
 export const getMusic = async () => {
@@ -23,7 +23,7 @@ export const addMusic = async (
     },
     {
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -37,7 +37,7 @@ export const deleteMusic = async (musicId: string, title: string) => {
     {
       data: { title },
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -59,7 +59,7 @@ export const likePicture = async (photoId: string, caption: string) => {
     { caption },
     {
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -72,7 +72,7 @@ export const deletePicture = async (photoId: string, caption: string) => {
     {
       data: { caption },
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -92,7 +92,7 @@ export const addPicture = async (caption: string, url: string) => {
     { caption, url },
     {
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -112,7 +112,7 @@ export const addTour = async (venue: string) => {
     { venue },
     {
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -130,7 +130,7 @@ export const addVideo = async (
     { title, thumb_nail, url },
     {
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -150,7 +150,7 @@ export const likeVideo = async (videoId: string, title: string) => {
     { title },
     {
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -163,7 +163,7 @@ export const deleteVideo = async (videoId: string, title: string) => {
     {
       data: { title },
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );
@@ -176,13 +176,13 @@ export const addComment = async (
   videoId: string,
   mediaType: string
 ) => {
-  const userId = cookie.get('superstar_userId');
+  const userId = cookie.get("superstar_userId");
   const response = await axios.post(
     `${baseURL}/starrecords/videos/${videoId}/comment`,
     { userId, comment, mediaType },
     {
       headers: {
-        'X-API-Key': cookie.get('superstar_token')
+        "X-API-Key": cookie.get("superstar_token")
       }
     }
   );

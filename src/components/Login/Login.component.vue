@@ -1,23 +1,35 @@
 <template>
-<mdb-container>
-  <mdb-row class="d-flex justify-content-center">
-  <mdb-col md="5" class="mt-5">
-  <mdb-card>
-    <mdb-card-body>
-      <form @submit.prevent="logIn">
-        <p class="h4 text-center py-4">Sign in</p>
-        <div class="grey-text">
-          <mdb-input label="Email" group type="email" required v-model="email"/>
-          <mdb-input label="Password" group type="password"  required v-model="password"/>
-        </div>
-        <div class="text-center py-4 mt-3">
-          <mdb-btn color="black" type="submit" dark>Login</mdb-btn>
-        </div>
-      </form>
-    </mdb-card-body>
-  </mdb-card>
-  </mdb-col>
-  </mdb-row>
+  <mdb-container>
+    <mdb-row class="d-flex justify-content-center">
+      <mdb-col md="5" class="mt-5">
+        <mdb-card>
+          <mdb-card-body>
+            <form @submit.prevent="logIn">
+              <p class="h4 text-center py-4">Sign in</p>
+              <div class="grey-text">
+                <mdb-input
+                  label="Email"
+                  group
+                  type="email"
+                  required
+                  v-model="email"
+                />
+                <mdb-input
+                  label="Password"
+                  group
+                  type="password"
+                  required
+                  v-model="password"
+                />
+              </div>
+              <div class="text-center py-4 mt-3">
+                <mdb-btn color="black" type="submit" dark>Login</mdb-btn>
+              </div>
+            </form>
+          </mdb-card-body>
+        </mdb-card>
+      </mdb-col>
+    </mdb-row>
   </mdb-container>
 </template>
 <script lang="ts">
@@ -70,10 +82,7 @@ export default class LoginComponent extends Vue {
           this.$router.push("/");
         }
       })
-      .catch(e => {
-        console.log("ERROR ------------>", e);
-      });
+      .catch(e => {});
   }
 }
 </script>
-

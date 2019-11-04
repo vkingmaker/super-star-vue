@@ -134,9 +134,7 @@ export default new Vuex.Store({
         .then(res => {
           commit('updateMusics', res.data);
         })
-        .catch(e => {
-          console.log('ERROR FROM ACTION --------->', e);
-        });
+        .catch(e => {});
     },
     favouriteMusic({ commit }, payload) {
       const { id, title } = payload;
@@ -146,9 +144,7 @@ export default new Vuex.Store({
             commit('likeMusic', id);
           }
         })
-        .catch(e => {
-          console.log('ERROR WHILE LIKING A MUSIC-------->', e);
-        });
+        .catch(e => {});
     },
     removeMusic({ commit }, payload) {
       const { id, title } = payload;
@@ -158,18 +154,14 @@ export default new Vuex.Store({
             commit('removeMusic', id);
           }
         })
-        .catch(e => {
-          console.log('ERROR WHILE DELETING A MUSIC--------->', e);
-        });
+        .catch(e => {});
     },
     updatePictures({ commit }) {
       getPicture()
         .then(res => {
           commit('updatePictures', res.data);
         })
-        .catch(e => {
-          console.log('ERROR FROM ACTION --------->', e);
-        });
+        .catch(e => {});
     },
     favouritePicture({ commit }, payload) {
       const { id, caption } = payload;
@@ -179,9 +171,7 @@ export default new Vuex.Store({
             commit('likePicture', id);
           }
         })
-        .catch(e => {
-          console.log('ERROR WHILE LIKING A PICTURE-------->', e);
-        });
+        .catch(e => {});
     },
     removePicture({ commit }, payload) {
       const { id, caption } = payload;
@@ -191,18 +181,14 @@ export default new Vuex.Store({
             commit('removePicture', id);
           }
         })
-        .catch(e => {
-          console.log('ERROR WHILE DELETING A Picture--------->', e);
-        });
+        .catch(e => {});
     },
     updateVideos({ commit }) {
       getVideo()
         .then(res => {
           commit('updateVideos', res.data);
         })
-        .catch(e => {
-          console.log('ERROR FROM ACTION --------->', e);
-        });
+        .catch(e => {});
     },
     selectedVideo({ commit }, payload: string) {
       commit('selectedVideo', payload);
@@ -216,9 +202,7 @@ export default new Vuex.Store({
             commit('selectedVideo', id);
           }
         })
-        .catch(e => {
-          console.log('ERROR WHILE LIKING A Video-------->', e);
-        });
+        .catch(e => {});
     },
     removeVideo(context, payload) {
       const { id, title } = payload;
@@ -229,18 +213,14 @@ export default new Vuex.Store({
             context.commit('selectedVideo', context.state.videos[0].id);
           }
         })
-        .catch(e => {
-          console.log('ERROR WHILE DELETING A VIDEO--------->', e);
-        });
+        .catch(e => {});
     },
     updateComment({ commit }) {
       getComment('video')
         .then(res => {
           commit('updateComment', res.data);
         })
-        .catch(e => {
-          console.log('AN ERROR OCCURED WHILE RETRIEVING COMMENTS ------->', e);
-        });
+        .catch(e => {});
     },
     logout(context) {
       context.commit('logout');

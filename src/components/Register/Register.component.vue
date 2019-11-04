@@ -1,24 +1,42 @@
 <template>
-<mdb-container>
-  <mdb-row class="d-flex justify-content-center">
-  <mdb-col md="5" class="mt-5">
-  <mdb-card>
-    <mdb-card-body>
-      <form @submit.prevent="registerUser">
-        <p class="h4 text-center py-4">Sign up</p>
-        <div class="grey-text">
-          <mdb-input label="Name" group type="text"  v-model="name" required />
-          <mdb-input label="Email" group type="email" v-model="email" required />
-          <mdb-input label="Password" group type="password" v-model="password" required/>
-        </div>
-        <div class="text-center py-4 mt-3">
-          <mdb-btn color="black" type="submit" dark>Register</mdb-btn>
-        </div>
-      </form>
-    </mdb-card-body>
-  </mdb-card>
-  </mdb-col>
-  </mdb-row>
+  <mdb-container>
+    <mdb-row class="d-flex justify-content-center">
+      <mdb-col md="5" class="mt-5">
+        <mdb-card>
+          <mdb-card-body>
+            <form @submit.prevent="registerUser">
+              <p class="h4 text-center py-4">Sign up</p>
+              <div class="grey-text">
+                <mdb-input
+                  label="Name"
+                  group
+                  type="text"
+                  v-model="name"
+                  required
+                />
+                <mdb-input
+                  label="Email"
+                  group
+                  type="email"
+                  v-model="email"
+                  required
+                />
+                <mdb-input
+                  label="Password"
+                  group
+                  type="password"
+                  v-model="password"
+                  required
+                />
+              </div>
+              <div class="text-center py-4 mt-3">
+                <mdb-btn color="black" type="submit" dark>Register</mdb-btn>
+              </div>
+            </form>
+          </mdb-card-body>
+        </mdb-card>
+      </mdb-col>
+    </mdb-row>
   </mdb-container>
 </template>
 <script lang="ts">
@@ -62,18 +80,14 @@ export default class RegisterComponent extends Vue {
   password = "";
 
   registerUser() {
-    console.log("NAME------------->", this.name);
-    console.log("Password------------->", this.password);
-    console.log("Email------------->", this.email);
-
     RegisterUser(this.email, this.name, this.password)
       .then(res => {
-        console.log("REGISTERED USER ----------->", res.data);
+        this.name = "";
+        this.password = "";
+        this.email = "";
+        this.$router.push("/login");
       })
-      .catch(e => {
-        console.log("AN ERROR OCCURED WHILE REGISTERING A USER", e);
-      });
+      .catch(e => {});
   }
 }
 </script>
-

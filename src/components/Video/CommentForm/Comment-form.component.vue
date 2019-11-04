@@ -3,10 +3,12 @@
     <form @submit.prevent="addComment">
       <mdb-card-body class="d-flex flex-column">
         <mdb-input label="Comment" type="text" v-model="comment" required />
-        <mdb-btn color="black" class="align-self-end" type="submit" dark large>Add</mdb-btn>
+        <mdb-btn color="black" class="align-self-end" type="submit" dark large
+          >Add</mdb-btn
+        >
       </mdb-card-body>
     </form>
-    </mdb-card>
+  </mdb-card>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -21,15 +23,11 @@ export default class CommentFormComponent extends Vue {
   comment = "";
   addComment() {
     const videoId = this.$store.state.selectedVideo.id;
-    console.log("VIDEO ID", videoId);
     addComment(this.comment, videoId, "video")
       .then(res => {
         this.comment = "";
-        console.log("YOUR COMMENT ----------->", res.data);
       })
-      .catch(e => {
-        console.log("AN ERROR OCCURED WHILE TRYING TO ADD YOUR COMMENT", e);
-      });
+      .catch(e => {});
   }
 }
 </script>

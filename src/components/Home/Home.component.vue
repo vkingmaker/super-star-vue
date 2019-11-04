@@ -1,12 +1,22 @@
 <template>
-<div>
-  <img src="https://www.patchwerk.com/images/home/new-client-slide.jpg" alt="" class="w-100">
-  <div class="welcome-msg">
-  <h2 class="display-4">Oliver twist</h2>
-<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque iusto itaque pariatur dolore explicabo iure perferendis velit odit beatae quam quia nesciunt debitis quis totam, tempora sit, alias in provident!</p>
-<mdb-btn outline="danger" darkWaves rounded>Stream on all platforms</mdb-btn>
+  <div>
+    <img
+      src="https://www.patchwerk.com/images/home/new-client-slide.jpg"
+      alt=""
+      class="w-100"
+    />
+    <div class="welcome-msg">
+      <h2 class="display-4">Oliver twist</h2>
+      <p class="lead">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque iusto
+        itaque pariatur dolore explicabo iure perferendis velit odit beatae quam
+        quia nesciunt debitis quis totam, tempora sit, alias in provident!
+      </p>
+      <mdb-btn outline="danger" darkWaves rounded
+        >Stream on all platforms</mdb-btn
+      >
+    </div>
   </div>
-</div>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -45,4 +55,3 @@ p {
   transform: translate(-50%, -70%);
 }
 </style>
-
