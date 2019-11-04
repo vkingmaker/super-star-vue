@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 import {
   getMusic,
   likeMusic,
@@ -11,15 +11,15 @@ import {
   likeVideo,
   deleteVideo,
   getComment
-} from '@/utils/api';
-import cookie from 'js-cookie';
-import { IMusic, IPhoto, IVideo } from '@/utils/interface/types';
+} from "@/utils/api";
+import cookie from "js-cookie";
+import { IMusic, IPhoto, IVideo } from "@/utils/interface/types";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    auth: '',
+    auth: "",
     musics: [] as any,
     pictures: [] as any,
     videos: [] as any,
@@ -28,7 +28,7 @@ export default new Vuex.Store({
   },
   getters: {
     auth(state) {
-      let email = state.auth ? state.auth : cookie.get('superstar_email');
+      let email = state.auth ? state.auth : cookie.get("superstar_email");
       return email;
     },
     musics(state) {
@@ -52,7 +52,7 @@ export default new Vuex.Store({
       state.musics.push(music);
     },
     logout(state) {
-      state.auth = '';
+      state.auth = "";
     },
     likeMusic(state, id: string) {
       const currentState = [...state.musics];
@@ -132,7 +132,7 @@ export default new Vuex.Store({
     updateMusics({ commit }) {
       getMusic()
         .then(res => {
-          commit('updateMusics', res.data);
+          commit("updateMusics", res.data);
         })
         .catch(e => {});
     },
@@ -141,7 +141,7 @@ export default new Vuex.Store({
       likeMusic(id, title)
         .then(res => {
           if (res.data) {
-            commit('likeMusic', id);
+            commit("likeMusic", id);
           }
         })
         .catch(e => {});
@@ -151,7 +151,7 @@ export default new Vuex.Store({
       deleteMusic(id, title)
         .then(res => {
           if (res.data) {
-            commit('removeMusic', id);
+            commit("removeMusic", id);
           }
         })
         .catch(e => {});
@@ -159,7 +159,7 @@ export default new Vuex.Store({
     updatePictures({ commit }) {
       getPicture()
         .then(res => {
-          commit('updatePictures', res.data);
+          commit("updatePictures", res.data);
         })
         .catch(e => {});
     },
@@ -168,7 +168,7 @@ export default new Vuex.Store({
       likePicture(id, caption)
         .then(res => {
           if (res.data) {
-            commit('likePicture', id);
+            commit("likePicture", id);
           }
         })
         .catch(e => {});
@@ -178,7 +178,7 @@ export default new Vuex.Store({
       deletePicture(id, caption)
         .then(res => {
           if (res.data) {
-            commit('removePicture', id);
+            commit("removePicture", id);
           }
         })
         .catch(e => {});
@@ -186,20 +186,20 @@ export default new Vuex.Store({
     updateVideos({ commit }) {
       getVideo()
         .then(res => {
-          commit('updateVideos', res.data);
+          commit("updateVideos", res.data);
         })
         .catch(e => {});
     },
     selectedVideo({ commit }, payload: string) {
-      commit('selectedVideo', payload);
+      commit("selectedVideo", payload);
     },
     favouriteVideo({ commit }, payload) {
       const { id, title } = payload;
       likeVideo(id, title)
         .then(res => {
           if (res.data) {
-            commit('likeVideo', id);
-            commit('selectedVideo', id);
+            commit("likeVideo", id);
+            commit("selectedVideo", id);
           }
         })
         .catch(e => {});
@@ -209,21 +209,21 @@ export default new Vuex.Store({
       deleteVideo(id, title)
         .then(res => {
           if (res.data) {
-            context.commit('removeVideo', id);
-            context.commit('selectedVideo', context.state.videos[0].id);
+            context.commit("removeVideo", id);
+            context.commit("selectedVideo", context.state.videos[0].id);
           }
         })
         .catch(e => {});
     },
     updateComment({ commit }) {
-      getComment('video')
+      getComment("video")
         .then(res => {
-          commit('updateComment', res.data);
+          commit("updateComment", res.data);
         })
         .catch(e => {});
     },
     logout(context) {
-      context.commit('logout');
+      context.commit("logout");
       context.getters.auth;
     }
   },
