@@ -7,35 +7,21 @@
     </mdb-container>
   </mdb-jumbotron>
   <mdb-container class="mt-5">
-    <mdb-row>
-      <mdb-col md="4" class="mb-5">
+    <mdb-row v-if="pictures.length">
+      <mdb-col md="4" class="mb-5" :key="picture.id" v-for="picture in pictures">
        <mdb-card>
-            <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
+            <mdb-card-image class="card-pic" :src="picture.url" alt="Card image cap"></mdb-card-image>
           </mdb-card>
           <mdb-card-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash text-danger"></i>
+            <i class="fa fa-heart text-danger" @click="likePicture(picture.id,picture.caption)"><span class="text-muted ml-1 small">({{picture.likes}})</span></i>
+            <i class="fa fa-trash text-danger" @click="deletePicture(picture.id,picture.caption)"></i>
           </mdb-card-body>
       </mdb-col>
-      <mdb-col md="4" class="mb-5">
-       <mdb-card>
-            <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
-          </mdb-card>
-          <mdb-card-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash text-danger"></i>
-          </mdb-card-body>
+    </mdb-row>
+    <mdb-row v-else>
+      <mdb-col md="12">
+        <p class="border lead text-center display-4">No Pictures</p>
       </mdb-col>
-      <mdb-col md="4" class="mb-5">
-       <mdb-card>
-            <mdb-card-image src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg" alt="Card image cap"></mdb-card-image>
-          </mdb-card>
-          <mdb-card-body class="d-flex justify-content-between mt-1">
-            <i class="fa fa-heart text-danger"><span class="text-muted ml-1 small">(0)</span></i>
-            <i class="fa fa-trash text-danger"></i>
-          </mdb-card-body>
-      </mdb-col>
-
     </mdb-row>
   </mdb-container>
 </section>
@@ -64,7 +50,23 @@ const {
     mdbCardBody
   }
 })
-export default class PhotoComponent extends Vue {}
+export default class PhotoComponent extends Vue {
+  get pictures() {
+    this.$store.dispatch("updatePictures");
+    return this.$store.state.pictures;
+  }
+
+  likePicture(id: string, caption: string) {
+    this.$store.dispatch("favouritePicture", { id, caption });
+  }
+
+  deletePicture(id: string, caption: string) {
+    this.$store.dispatch("removePicture", { id, caption });
+  }
+}
 </script>
-<style>
+<style scoped>
+.card-pic {
+  height: 400px;
+}
 </style>

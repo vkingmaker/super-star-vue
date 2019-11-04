@@ -31,7 +31,6 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { getMusic } from "@/utils/api";
 const {
   mdbJumbotron,
   mdbContainer,
@@ -55,6 +54,7 @@ const {
 })
 export default class MusicComponent extends Vue {
   get musics() {
+    this.$store.dispatch("updateMusics");
     return this.$store.state.musics;
   }
 
@@ -63,7 +63,6 @@ export default class MusicComponent extends Vue {
   }
 
   deleteMusic(id: string, title: string) {
-    // console.log("DELETE MUSIC WITH ID------->", id);
     this.$store.dispatch("removeMusic", { id, title });
   }
 }

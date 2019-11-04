@@ -73,7 +73,7 @@ export default class App extends Vue {
   }
   logout() {
     removeCookie();
-    this.$store.commit("logout");
+    this.$store.dispatch("logout");
   }
 }
 </script>

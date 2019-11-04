@@ -1,21 +1,44 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { getMusic, likeMusic, deleteMusic } from '@/utils/api';
+import {
+  getMusic,
+  likeMusic,
+  deleteMusic,
+  likePicture,
+  getPicture,
+  deletePicture,
+  getVideo,
+  likeVideo,
+  deleteVideo,
+  getComment
+} from '@/utils/api';
 import cookie from 'js-cookie';
-import { IMusic } from '@/utils/interface/types';
+import { IMusic, IPhoto, IVideo } from '@/utils/interface/types';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     auth: '',
-    musics: [] as any
+    musics: [] as any,
+    pictures: [] as any,
+    videos: [] as any,
+    selectedVideo: {},
+    comments: [] as any
   },
   getters: {
     auth(state) {
       let email = state.auth ? state.auth : cookie.get('superstar_email');
-
       return email;
+    },
+    musics(state) {
+      return state.musics;
+    },
+    pictures(state) {
+      return state.pictures;
+    },
+    videos(state) {
+      return state.videos;
     }
   },
   mutations: {
@@ -41,7 +64,6 @@ export default new Vuex.Store({
       });
     },
     removeMusic(state, id: string) {
-      console.log('DELETE MUSIC WITH ID------->', id);
       const currentState = [...state.musics];
 
       currentState.find((music: IMusic, index: number) => {
@@ -49,6 +71,61 @@ export default new Vuex.Store({
           state.musics.splice(index, 1);
         }
       });
+    },
+    updatePictures(state, pictures) {
+      state.pictures = pictures;
+    },
+    createPicture(state, picture) {
+      state.pictures.push(picture);
+    },
+    likePicture(state, id: string) {
+      const currentState = [...state.pictures];
+
+      currentState.find((picture: IPhoto, index: number) => {
+        if (picture.id == id) {
+          state.pictures[index].likes++;
+        }
+      });
+    },
+    removePicture(state, id: string) {
+      const currentState = [...state.musics];
+
+      currentState.find((picture: IPhoto, index: number) => {
+        if (picture.id == id) {
+          state.pictures.splice(index, 1);
+        }
+      });
+    },
+    updateVideos(state, videos) {
+      state.videos = videos;
+    },
+    selectedVideo(state, videoId) {
+      state.videos.find((video: IVideo) => {
+        if (video.id == videoId) {
+          state.selectedVideo = video;
+        }
+      });
+    },
+    likeVideo(state, id: string) {
+      const currentState = [...state.videos];
+
+      currentState.find((video: IVideo, index: number) => {
+        if (video.id == id) {
+          state.videos[index].likes++;
+        }
+      });
+    },
+    removeVideo(state, id: string) {
+      const currentState = [...state.videos];
+
+      currentState.find((video: IVideo, index: number) => {
+        if (video.id == id) {
+          state.videos.splice(index, 1);
+        }
+      });
+    },
+    updateComment(state, comments) {
+      state.comments = comments;
     }
   },
   actions: {
@@ -70,7 +147,7 @@ export default new Vuex.Store({
           }
         })
         .catch(e => {
-          console.log('ERROR WHILE LIKING A PICTURE-------->', e);
+          console.log('ERROR WHILE LIKING A MUSIC-------->', e);
         });
     },
     removeMusic({ commit }, payload) {
@@ -82,8 +159,92 @@ export default new Vuex.Store({
           }
         })
         .catch(e => {
-          console.log('ERROR WHILE DELETING A PICTURE--------->', e);
+          console.log('ERROR WHILE DELETING A MUSIC--------->', e);
         });
+    },
+    updatePictures({ commit }) {
+      getPicture()
+        .then(res => {
+          commit('updatePictures', res.data);
+        })
+        .catch(e => {
+          console.log('ERROR FROM ACTION --------->', e);
+        });
+    },
+    favouritePicture({ commit }, payload) {
+      const { id, caption } = payload;
+      likePicture(id, caption)
+        .then(res => {
+          if (res.data) {
+            commit('likePicture', id);
+          }
+        })
+        .catch(e => {
+          console.log('ERROR WHILE LIKING A PICTURE-------->', e);
+        });
+    },
+    removePicture({ commit }, payload) {
+      const { id, caption } = payload;
+      deletePicture(id, caption)
+        .then(res => {
+          if (res.data) {
+            commit('removePicture', id);
+          }
+        })
+        .catch(e => {
+          console.log('ERROR WHILE DELETING A Picture--------->', e);
+        });
+    },
+    updateVideos({ commit }) {
+      getVideo()
+        .then(res => {
+          commit('updateVideos', res.data);
+        })
+        .catch(e => {
+          console.log('ERROR FROM ACTION --------->', e);
+        });
+    },
+    selectedVideo({ commit }, payload: string) {
+      commit('selectedVideo', payload);
+    },
+    favouriteVideo({ commit }, payload) {
+      const { id, title } = payload;
+      likeVideo(id, title)
+        .then(res => {
+          if (res.data) {
+            commit('likeVideo', id);
+            commit('selectedVideo', id);
+          }
+        })
+        .catch(e => {
+          console.log('ERROR WHILE LIKING A Video-------->', e);
+        });
+    },
+    removeVideo(context, payload) {
+      const { id, title } = payload;
+      deleteVideo(id, title)
+        .then(res => {
+          if (res.data) {
+            context.commit('removeVideo', id);
+            context.commit('selectedVideo', context.state.videos[0].id);
+          }
+        })
+        .catch(e => {
+          console.log('ERROR WHILE DELETING A VIDEO--------->', e);
+        });
+    },
+    updateComment({ commit }) {
+      getComment('video')
+        .then(res => {
+          commit('updateComment', res.data);
+        })
+        .catch(e => {
+          console.log('AN ERROR OCCURED WHILE RETRIEVING COMMENTS ------->', e);
+        });
+    },
+    logout(context) {
+      context.commit('logout');
+      context.getters.auth;
     }
   },
   modules: {}

@@ -52,7 +52,6 @@ export default class TourComponent extends Vue {
   mounted() {
     getTour()
       .then(res => {
-        console.log("TOURS ------------>", res.data);
         this.tours = res.data;
       })
       .catch(e => {

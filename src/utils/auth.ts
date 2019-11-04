@@ -8,9 +8,7 @@ export const baseURL =
   'http://localhost:3000';
 
 export const LoginUser = async (email: string, password: string) => {
-  const response = await axios.post(`${baseURL}/login`, {
-    data: { email, password }
-  });
+  const response = await axios.post(`${baseURL}/login`, { email, password });
 
   return response;
 };
@@ -21,33 +19,13 @@ export const RegisterUser = async (
   password: string
 ) => {
   const response = await axios.post(`${baseURL}/register`, {
-    data: { email, password, name }
+    email,
+    password,
+    name
   });
 
   return response;
 };
-
-// export const auth = (ctx: any, verifyAdmin: boolean = false) => {
-//   const token = getCookie('token', ctx);
-//   const isAdmin = getCookie('isAdmin', ctx);
-
-//   if (verifyAdmin && isAdmin === 'false') {
-//     Router.push('/login');
-//     return;
-//   }
-
-//   if (ctx.req && !token) {
-//     ctx.res.writeHead(302, { Location: '/login' });
-//     ctx.res.end();
-//     return;
-//   }
-
-//   if (!token) {
-//     Router.push('/login');
-//   }
-
-//   return token;
-// };
 
 export const isAdmin = () => {
   if (typeof window !== 'undefined') {
